@@ -6,6 +6,9 @@ export interface IBlog extends Document {
   content: string;
   metaTitle: string;
   metaDescription: string;
+  focusKeyword?: string;
+  tags?: string[];
+  faq?: { question: string; answer: string }[];
   createdAt: Date;
   updatedAt: Date;
 }
@@ -17,6 +20,9 @@ const BlogSchema: Schema = new Schema(
     content: { type: String, required: true },
     metaTitle: { type: String, required: true },
     metaDescription: { type: String, required: true },
+    focusKeyword: { type: String, default: "" },
+    tags: { type: [String], default: [] },
+    faq: [{ question: { type: String }, answer: { type: String } }],
   },
   { timestamps: true }
 );
