@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname, useRouter } from "next/navigation";
-import { LayoutDashboard, FileText, Wrench, LogOut, Mail } from "lucide-react";
+import { LayoutDashboard, FileText, Wrench, LogOut, Mail, Tag } from "lucide-react";
 import Link from "next/link";
 import ThemeToggle from "@/components/ThemeToggle";
 import { useEffect, useState, useCallback } from "react";
@@ -10,6 +10,7 @@ const NAV_LINKS = [
   { name: "Dashboard", href: "/admin", icon: LayoutDashboard },
   { name: "Blogs", href: "/admin/blogs", icon: FileText },
   { name: "Tools", href: "/admin/tools", icon: Wrench },
+  { name: "Categories", href: "/admin/categories", icon: Tag },
   { name: "Messages", href: "/admin/messages", icon: Mail },
 ];
 

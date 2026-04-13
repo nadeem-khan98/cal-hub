@@ -15,8 +15,21 @@ export async function GET() {
 export async function POST(request: Request) {
   try {
     const body = await request.json();
+    
+    // Debug log to check if category is coming through
+    console.log("Incoming create:", body);
+
     await connectDB();
-    const tool = await Tool.create(body);
+    const tool = await Tool.create({
+      name: body.name,
+      slug: body.slug,
+      description: body.description,
+      metaTitle: body.metaTitle,
+      metaDescription: body.metaDescription,
+      category: body.category || "other", // ✅ IMPORTANT FIX: default to 'other'
+      inputs: body.inputs || [],
+    });
+    
     return NextResponse.json({ success: true, data: tool }, { status: 201 });
   } catch (error: any) {
     return NextResponse.json({ success: false, error: error.message }, { status: 400 });

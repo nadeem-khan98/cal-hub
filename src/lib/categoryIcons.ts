@@ -1,0 +1,27 @@
+export const categoryIcons: any = {
+  finance: "💰",
+  math: "📐",
+  education: "🎓",
+  unit: "🔄",
+  health: "❤️",
+  fitness: "🏋️",
+  business: "📊",
+  engineering: "⚙️",
+  science: "🔬",
+  data: "📊",
+  network: "🌐",
+  security: "🔐",
+  travel: "✈️",
+  food: "🍔",
+  sports: "⚽",
+  gaming: "🎮",
+  lifestyle: "🧘",
+  shopping: "🛒",
+  budget: "💵",
+  productivity: "📅",
+  salary: "💼",
+  tax: "📄",
+
+  // fallback
+  default: "📁",
+};
