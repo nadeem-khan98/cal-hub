@@ -1,57 +1,71 @@
-import Link from "next/link";
 import { Metadata } from "next";
-import { Calculator } from "lucide-react";
 import connectDB from "@/lib/db";
 import Tool from "@/models/Tool";
+import Category from "@/models/Category";
+import ToolCategoryFilter from "@/components/ToolCategoryFilter";
 
 export const metadata: Metadata = {
-  title: "All Tools - CalcHub",
-  description: "Browse our collection of free online calculators including BMI, Age, EMI, and more. Clean and accurate.",
+  title: "All Calculator Tools - CalcHub",
+  description:
+    "Browse free online calculators for finance, math, health, and more. Fast, accurate, and easy-to-use tools.",
 };
 
 export const revalidate = 3600;
 
 export default async function ToolsIndex() {
   await connectDB();
-  const tools = await Tool.find({}).sort({ createdAt: -1 }).lean();
+
+  const [tools, categories] = await Promise.all([
+    Tool.find({})
+      .select("name slug description category")
+      .sort({ createdAt: -1 })
+      .lean(),
+
+    Category.find({})
+      .select("name slug")
+      .sort({ name: 1 })
+      .lean(),
+  ]);
+
+  // ✅ Safe serialization
+  const serializedTools =
+    tools?.map((t: any) => ({
+      _id: t._id.toString(),
+      name: t.name,
+      slug: t.slug,
+      description: t.description,
+      category: t.category || "other",
+    })) || [];
+
+  const serializedCategories =
+    categories?.map((c: any) => ({
+      _id: c._id.toString(),
+      name: c.name,
+      slug: c.slug,
+    })) || [];
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-16 bg-white text-gray-800">
+    <div className="max-w-6xl mx-auto px-4 py-16">
+      
+      {/* 🔥 HEADER */}
       <div className="max-w-2xl mb-12">
-        <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 tracking-tight mb-4">
+        <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-4 
+          bg-gradient-to-r from-blue-600 to-indigo-500 
+          bg-clip-text text-transparent">
           All Calculator Tools
         </h1>
-        <p className="text-lg text-gray-500">
-          Select a tool below to quickly solve your math, health, and financial calculations.
+
+        <p className="text-lg text-gray-600 dark:text-gray-400">
+          Explore our collection of fast, accurate, and free calculators for finance,
+          math, health, and daily use.
         </p>
       </div>
 
-      {tools.length === 0 ? (
-        <div className="py-20 text-gray-500">
-          <p>No tools available yet.</p>
-        </div>
-      ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {tools.map((tool: any) => (
-            <Link 
-              key={tool._id.toString()} 
-              href={`/tools/${tool.slug}`}
-              className="group p-6 bg-white border border-gray-200 rounded-2xl hover:border-blue-200 hover:shadow-md transition-all duration-300 flex flex-col h-full"
-            >
-              <div className="w-12 h-12 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center mb-5 group-hover:bg-blue-600 group-hover:text-white transition-colors">
-                <Calculator size={24} />
-              </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-2">{tool.name}</h3>
-              <p className="text-gray-500 text-sm mb-6 flex-1 line-clamp-2 leading-relaxed">
-                {tool.description}
-              </p>
-              <div className="mt-auto pt-4 border-t border-gray-50 text-sm font-semibold text-blue-600">
-                Start Calculating &rarr;
-              </div>
-            </Link>
-          ))}
-        </div>
-      )}
+      {/* 🔥 CATEGORY + TOOLS (CLIENT COMPONENT) */}
+      <ToolCategoryFilter
+        tools={serializedTools}
+        categories={serializedCategories}
+      />
     </div>
   );
 }
