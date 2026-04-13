@@ -9,6 +9,7 @@ import { ArrowLeft, ArrowRight, HelpCircle } from "lucide-react";
 import JsonLd from "@/components/JsonLd";
 import AdSlot from "@/components/AdSlot";
 import ToolCTA from "@/components/ToolCTA";
+import PopularTools from "@/components/PopularTools";
 import React from "react";
 
 export const revalidate = 3600;
@@ -198,15 +199,20 @@ export default async function BlogPostPage({ params }: Props) {
 
         <AdSlot position="End of Article" />
 
-        <div className="mt-20 pt-8 border-t border-gray-100 dark:border-gray-800 flex flex-col sm:flex-row justify-between items-center gap-6">
+        <div className="mt-16 pt-8 border-t border-gray-100 dark:border-gray-800 flex flex-col sm:flex-row justify-between items-center gap-6 bg-blue-50 dark:bg-blue-900/10 p-8 rounded-3xl border border-blue-100 dark:border-blue-900/30">
           <div>
-            <p className="text-gray-900 dark:text-gray-100 font-bold mb-1">Ready to crunch some numbers?</p>
+            <h3 className="text-xl text-gray-900 dark:text-gray-100 font-bold mb-1">Ready to crunch some numbers?</h3>
             <p className="text-gray-500 dark:text-gray-400 text-sm">Explore our free tools crafted for speed and precision.</p>
           </div>
-          <Link href="/tools" className="px-8 py-4 bg-blue-600 hover:bg-blue-700 hover:-translate-y-0.5 text-white text-sm font-bold rounded-xl transition-all shadow-md hover:shadow-lg w-full sm:w-auto text-center">
+          <Link href="/tools" className="px-8 py-4 bg-blue-600 hover:bg-blue-700 hover:-translate-y-0.5 text-white text-sm font-bold rounded-xl transition-all shadow-md hover:shadow-lg w-full sm:w-auto text-center shrink-0">
             Explore Calculators <ArrowRight size={16} className="ml-2 inline-block" />
           </Link>
         </div>
+
+        {/* Dynamic Popular Tools Section */}
+        {/* @ts-expect-error Async Server Component */}
+        <PopularTools limit={3} />
+
       </article>
     </div>
   );
