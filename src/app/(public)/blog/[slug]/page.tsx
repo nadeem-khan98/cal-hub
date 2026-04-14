@@ -170,7 +170,6 @@ export default async function BlogPostPage({ params }: Props) {
                return (
                  <React.Fragment key={`frag-${index}`}>
                    {renderBlock}
-                   {/* @ts-expect-error Async Server Component */}
                    <ToolCTA slug={slug} />
                  </React.Fragment>
                );
@@ -210,7 +209,6 @@ export default async function BlogPostPage({ params }: Props) {
         </div>
 
         {/* Dynamic Popular Tools Section */}
-        {/* @ts-expect-error Async Server Component */}
         <PopularTools limit={3} />
 
       </article>
