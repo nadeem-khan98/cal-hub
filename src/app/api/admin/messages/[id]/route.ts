@@ -1,8 +1,8 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import connectDB from "@/lib/db";
 import Contact from "@/models/Contact";
 
-export async function DELETE(req: Request, { params }: { params: Promise<{ id: string }> }) {
+export async function DELETE(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
     const { id } = await params;
     await connectDB();
@@ -18,12 +18,12 @@ export async function DELETE(req: Request, { params }: { params: Promise<{ id: s
   }
 }
 
-export async function PATCH(req: Request, { params }: { params: Promise<{ id: string }> }) {
+export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
     const { id } = await params;
     const { read } = await req.json();
     await connectDB();
-    const updatedContact = await Contact.findByIdAndUpdate(id, { read }, { new: true });
+    const updatedContact = await Contact.findByIdAndUpdate(id, { read }, { returnDocument: "after" });
 
     if (!updatedContact) {
       return NextResponse.json({ success: false, error: "Message not found" }, { status: 404 });

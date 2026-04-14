@@ -1,10 +1,10 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import connectDB from "@/lib/db";
 import Category from "@/models/Category";
 
 // DELETE /api/admin/categories/[id]
 export async function DELETE(
-  _request: Request,
+  _request: NextRequest,
   context: { params: Promise<{ id: string }> }
 ) {
   try {

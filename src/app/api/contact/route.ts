@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import connectDB from "@/lib/db";
 import Contact from "@/models/Contact";
 import { sendContactNotificationEmail } from "@/lib/email";
@@ -8,7 +8,7 @@ const rateLimitMap = new Map<string, { count: number; resetAt: number }>();
 const RATE_LIMIT_WINDOW_MS = 60 * 60 * 1000; // 1 hour
 const MAX_REQUESTS_PER_WINDOW = 3;
 
-function getRateLimitKey(req: Request): string {
+function getRateLimitKey(req: NextRequest): string {
   const forwarded = req.headers.get("x-forwarded-for");
   const ip = forwarded ? forwarded.split(",")[0].trim() : "unknown";
   return ip;
@@ -32,7 +32,7 @@ function isRateLimited(key: string): boolean {
   return false;
 }
 
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
   try {
     const key = getRateLimitKey(req);
     if (isRateLimited(key)) {

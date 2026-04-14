@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import connectDB from "@/lib/db";
 import Category from "@/models/Category";
 
@@ -14,7 +14,7 @@ export async function GET() {
 }
 
 // POST /api/admin/categories
-export async function POST(request: Request) {
+export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
     const { name, slug, description } = body;
