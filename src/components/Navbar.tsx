@@ -10,7 +10,7 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <header className="bg-white dark:bg-gray-900 border-b border-gray-100 dark:border-gray-800 sticky top-0 z-50 transition-colors">
+    <header className="bg-white dark:bg-gray-900 border-b border-gray-100 dark:border-gray-800 sticky top-0 z-50 transition-colors duration-300">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="flex justify-between items-center h-16 gap-4">
           {/* Logo */}
@@ -18,9 +18,9 @@ export default function Navbar() {
             <Link
               href="/"
               onClick={() => setIsOpen(false)}
-              className="flex items-center space-x-2 text-gray-900 dark:text-gray-100 hover:text-blue-600 transition-colors group"
+              className="flex items-center space-x-2 text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors group"
             >
-              <div className="bg-blue-600 text-white p-2 rounded-lg group-hover:bg-blue-700 transition">
+              <div className="bg-blue-600 text-white p-2 rounded-lg group-hover:bg-blue-700 transition shadow-sm">
                 <Calculator size={20} className="stroke-[2.5]" />
               </div>
               <span className="font-extrabold text-lg tracking-tight">CalcHub</span>

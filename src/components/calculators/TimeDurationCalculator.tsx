@@ -27,25 +27,25 @@ export default function TimeDurationCalculator() {
 
   return (
     <div className="space-y-12">
-      <div className="bg-white p-8 rounded-2xl border border-gray-200 shadow-sm max-w-xl mx-auto w-full">
+      <div className="bg-white dark:bg-gray-800 p-8 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-sm max-w-xl mx-auto w-full transition-colors duration-300">
         <form onSubmit={calculateDuration} className="space-y-6">
           <div className="flex flex-col sm:flex-row gap-6">
             <div className="flex-1">
-              <label className="block text-sm font-semibold text-gray-700 mb-2">Start Time</label>
+              <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Start Time</label>
               <input
                 type="time"
                 required
-                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-shadow text-gray-800"
+                className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all text-gray-800 dark:text-white"
                 value={startTime}
                 onChange={(e) => setStartTime(e.target.value)}
               />
             </div>
             <div className="flex-1">
-              <label className="block text-sm font-semibold text-gray-700 mb-2">End Time</label>
+              <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">End Time</label>
               <input
                 type="time"
                 required
-                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-shadow text-gray-800"
+                className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all text-gray-800 dark:text-white"
                 value={endTime}
                 onChange={(e) => setEndTime(e.target.value)}
               />
@@ -53,23 +53,23 @@ export default function TimeDurationCalculator() {
           </div>
           <button
             type="submit"
-            className="w-full py-3 px-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-colors focus:ring-4 focus:ring-blue-100"
+            className="w-full py-3 px-4 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg transition-all shadow-md hover:shadow-lg focus:ring-4 focus:ring-blue-500/20 active:scale-[0.98]"
           >
             Calculate Time Difference
           </button>
         </form>
 
         {result && (
-          <div className="mt-8 p-6 bg-blue-50 rounded-xl border border-blue-100 text-center animate-in fade-in slide-in-from-bottom-4 duration-300">
-            <p className="text-sm text-blue-800 font-medium mb-1">Time Elapsed</p>
-            <p className="text-3xl sm:text-4xl font-bold text-blue-900 tracking-tight">{result}</p>
+          <div className="mt-8 p-6 bg-blue-50 dark:bg-blue-900/20 rounded-xl border border-blue-100 dark:border-blue-800/30 text-center animate-in fade-in slide-in-from-bottom-4 duration-300">
+            <p className="text-sm text-blue-800 dark:text-blue-400 font-medium mb-1">Time Elapsed</p>
+            <p className="text-3xl sm:text-4xl font-bold text-blue-900 dark:text-blue-300 tracking-tight">{result}</p>
           </div>
         )}
       </div>
 
-      <div className="max-w-3xl mx-auto space-y-8 text-gray-600">
-        <div className="prose prose-blue max-w-none">
-          <h2 className="text-2xl font-bold text-gray-900">Calculating Time Duration</h2>
+      <div className="max-w-3xl mx-auto space-y-8 text-gray-600 dark:text-gray-400 transition-colors duration-300">
+        <div className="prose prose-blue dark:prose-invert max-w-none">
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Calculating Time Duration</h2>
           <p>
             Figuring out exactly how many hours and minutes have passed between a specific start and end time is a common requirement for employee timesheets, logging freelance billing hours, or just tracking how long you've been working on a hobby project.
           </p>
@@ -81,15 +81,15 @@ export default function TimeDurationCalculator() {
           </p>
         </div>
 
-        <div className="border-t border-gray-200 pt-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">Frequently Asked Questions</h2>
+        <div className="border-t border-gray-200 dark:border-gray-700 pt-8">
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Frequently Asked Questions</h2>
           <div className="space-y-6">
             <div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">What if my end time goes past midnight?</h3>
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">What if my end time goes past midnight?</h3>
               <p>Our tool automatically recognizes if the end time is numerically smaller than the start time and assumes a day roll-over, seamlessly calculating the time over midnight!</p>
             </div>
             <div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">Does this support seconds?</h3>
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Does this support seconds?</h3>
               <p>For ease of use and standard billing/timesheet applications, this calculator only relies on the Hour and Minute precision.</p>
             </div>
           </div>

@@ -50,9 +50,9 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex text-gray-900 dark:text-gray-100 transition-colors">
+    <div className="min-h-screen bg-background flex text-foreground transition-colors duration-300">
       {/* Sidebar */}
-      <aside className="w-64 shrink-0 bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 flex flex-col transition-colors shadow-sm">
+      <aside className="w-64 shrink-0 bg-white dark:bg-[#111827] border-r border-gray-200 dark:border-gray-800 flex flex-col transition-colors shadow-sm">
         {/* Logo */}
         <div className="p-6 border-b border-gray-100 dark:border-gray-700">
           <h1 className="text-xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-400 mb-4">

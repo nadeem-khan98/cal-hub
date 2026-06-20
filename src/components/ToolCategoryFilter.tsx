@@ -41,23 +41,13 @@ export default function ToolCategoryFilter({
         {/* ALL BUTTON */}
         <button
           onClick={() => setActive("all")}
-          className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold border transition-all duration-200 ${
+          className={`inline-flex items-center gap-2 px-6 py-2.5 rounded-full text-sm font-bold border transition-all duration-300 ${
             active === "all"
-              ? "bg-blue-600 text-white border-blue-600 shadow"
-              : "bg-white dark:bg-gray-900 text-gray-600 dark:text-gray-400 border-gray-200 dark:border-gray-700 hover:border-blue-300 dark:hover:border-blue-600 hover:text-blue-600 dark:hover:text-blue-400"
+              ? "bg-blue-600 text-white border-blue-600 shadow-md translate-y-[-1px]"
+              : "bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 border-transparent hover:bg-gray-200 dark:hover:bg-gray-700"
           }`}
         >
-          <span className="text-base">⚡</span>
-          All
-          <span
-            className={`text-xs px-1.5 py-0.5 rounded-full ${
-              active === "all"
-                ? "bg-white/20 text-white"
-                : "bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400"
-            }`}
-          >
-            {tools?.length || 0}
-          </span>
+          All Tools
         </button>
 
         {/* CATEGORY BUTTONS */}
@@ -72,30 +62,13 @@ export default function ToolCategoryFilter({
             <button
               key={cat.slug}
               onClick={() => setActive(cat.slug)}
-              className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold border transition-all duration-200 ${
+              className={`inline-flex items-center gap-2 px-6 py-2.5 rounded-full text-sm font-bold border transition-all duration-300 ${
                 active === cat.slug
-                  ? "bg-blue-600 text-white border-blue-600 shadow"
-                  : "bg-white dark:bg-gray-900 text-gray-600 dark:text-gray-400 border-gray-200 dark:border-gray-700 hover:border-blue-300 dark:hover:border-blue-600 hover:text-blue-600 dark:hover:text-blue-400"
+                  ? "bg-blue-600 text-white border-blue-600 shadow-md translate-y-[-1px]"
+                  : "bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 border-transparent hover:bg-gray-200 dark:hover:bg-gray-700"
               }`}
             >
-              {/* ✅ ICON */}
-              <span className="text-base">
-                {categoryIcons[cat.slug?.toLowerCase()] || "📁"}
-              </span>
-
-              {/* NAME */}
               {cat.name}
-
-              {/* COUNT */}
-              <span
-                className={`text-xs px-1.5 py-0.5 rounded-full ${
-                  active === cat.slug
-                    ? "bg-white/20 text-white"
-                    : "bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400"
-                }`}
-              >
-                {count}
-              </span>
             </button>
           );
         })}
@@ -114,34 +87,23 @@ export default function ToolCategoryFilter({
             <Link
               key={tool._id}
               href={`/tools/${tool.slug}`}
-              className="group p-6 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-2xl hover:border-blue-200 dark:hover:border-blue-700 hover:shadow-lg dark:hover:shadow-blue-900/10 transition-all duration-300 flex flex-col h-full"
+              className="group p-8 bg-white dark:bg-[#111827] border border-gray-200 dark:border-gray-800 rounded-2xl hover:shadow-md hover:scale-[1.02] transition-all duration-300 flex flex-col h-full"
             >
-              {/* ICON BOX */}
-              <div className="w-12 h-12 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-xl flex items-center justify-center mb-5 group-hover:bg-blue-600 group-hover:text-white transition">
-                <Calculator size={24} />
+              <div className="w-14 h-14 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-xl flex items-center justify-center mb-6 transition-all duration-300">
+                <Calculator size={28} />
               </div>
 
-              {/* CATEGORY TAG */}
-              {tool.category && tool.category !== "other" && (
-                <span className="text-[10px] uppercase font-bold tracking-wider text-blue-500 mb-2">
-                  {tool.category}
-                </span>
-              )}
-
-              {/* TITLE */}
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-3 tracking-tight">
                 {tool.name}
               </h3>
 
-              {/* DESCRIPTION */}
-              <p className="text-sm text-gray-500 dark:text-gray-400 mb-4 line-clamp-2">
+              <p className="text-gray-600 dark:text-gray-400 mb-8 flex-1 leading-relaxed">
                 {tool.description}
               </p>
 
-              {/* CTA */}
-              <span className="mt-auto text-sm font-medium text-blue-600 group-hover:underline">
-                Start Calculating →
-              </span>
+              <div className="mt-auto inline-flex items-center text-sm font-bold text-blue-600 dark:text-blue-400">
+                Use Tool <ArrowRight size={16} className="ml-2 group-hover:translate-x-1 transition-transform" />
+              </div>
             </Link>
           ))}
         </div>

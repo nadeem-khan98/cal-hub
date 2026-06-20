@@ -16,6 +16,7 @@ import TimeDurationCalculator from "@/components/calculators/TimeDurationCalcula
 import TipCalculator from "@/components/calculators/TipCalculator";
 import LoanInterestCalculator from "@/components/calculators/LoanInterestCalculator";
 import AdSlot from "@/components/AdSlot";
+import FAQ from "@/components/FAQ";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -67,100 +68,113 @@ export default async function ToolPage({ params }: Props) {
   const ActiveCalculator = ToolComponents[slug] || null;
 
   return (
-    <div className="bg-white dark:bg-gray-950 transition-colors">
-      <div className="max-w-5xl mx-auto px-4 py-8">
-        <Link href="/tools" className="inline-flex items-center text-sm font-semibold text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 mb-10 transition-colors">
+    <div className="bg-background transition-colors">
+      <div className="max-w-6xl mx-auto px-4 py-12">
+        <Link href="/tools" className="inline-flex items-center text-sm font-semibold text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 mb-8 transition-colors">
           <ArrowLeft size={16} className="mr-2" /> Back to Tools
         </Link>
 
-        {/* Header */}
-        <div className="text-center mb-10 max-w-3xl mx-auto">
-          <div className="inline-flex items-center justify-center w-20 h-20 rounded-3xl bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 mb-6 shadow-sm">
+        {/* 1. Header (title + description) */}
+        <div className="text-center mb-12 max-w-3xl mx-auto">
+          <div className="inline-flex items-center justify-center w-20 h-20 rounded-3xl bg-white dark:bg-[#111827] border border-gray-200 dark:border-gray-800 text-blue-600 dark:text-blue-400 mb-6 shadow-sm">
             <Calculator size={40} />
           </div>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 dark:text-white tracking-tight mb-6 leading-tight">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white tracking-tight mb-6 leading-tight">
             {tool.name}
           </h1>
-          <p className="text-lg md:text-xl text-gray-500 dark:text-gray-400 leading-relaxed text-balance">
+          <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 leading-relaxed max-w-2xl mx-auto">
             {tool.description}
           </p>
         </div>
 
-        <AdSlot position="Top of Tool" />
+        {/* 2. Top Ad (AdSense) */}
+        <div className="mb-12">
+          <AdSlot position="Top of Tool" />
+        </div>
 
-        {/* Main Calculator Area */}
-        <div className="mb-16">
+        {/* 3. Calculator Card (centered) */}
+        <div className="mb-20 max-w-2xl mx-auto">
           {ActiveCalculator ? (
-            <div className="p-1 sm:p-2 bg-gray-50 dark:bg-gray-900 rounded-3xl border border-gray-100 dark:border-gray-800 shadow-sm">
+            <div className="bg-white dark:bg-[#111827] border border-gray-200 dark:border-gray-800 rounded-2xl shadow-sm p-1 sm:p-2">
               <ActiveCalculator />
             </div>
           ) : (
-            <div className="bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-800 text-gray-500 dark:text-gray-400 p-8 rounded-2xl text-center">
+            <div className="bg-white dark:bg-[#111827] border border-gray-200 dark:border-gray-800 text-gray-500 p-12 rounded-2xl text-center">
               <p>This calculator logic is currently being implemented.</p>
             </div>
           )}
         </div>
 
-        <AdSlot position="Middle Setup" />
+        <div className="max-w-3xl mx-auto">
+          {/* 4. SEO Content Section (clean readable guide) */}
+          <section className="mb-16">
+            <div className="prose prose-blue dark:prose-invert max-w-none">
+              <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">How to use the {tool.name} effectively</h2>
+              <p>
+                Whether you are planning your finances, tracking health metrics, or doing quick daily math, this tool ensures you don't have to worry about the underlying complex equations. The results update in real-time, allowing you to tweak your inputs and instantly see the outcome.
+              </p>
+              
+              <div className="bg-blue-50 dark:bg-blue-900/10 border border-blue-100 dark:border-blue-900/30 rounded-2xl p-6 my-10">
+                <h3 className="text-lg font-bold text-blue-900 dark:text-blue-300 mb-2">Pro Tip</h3>
+                <p className="text-blue-800 dark:text-blue-400 text-sm mb-0">
+                  Always double-check your input values to ensure maximum precision. Our tools are built with the latest standardized formulas to provide industry-leading accuracy.
+                </p>
+              </div>
 
-        {/* Explanation Section */}
-        <section className="mb-16 max-w-4xl mx-auto">
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">How to use the {tool.name}</h2>
-          <div className="prose prose-blue dark:prose-invert max-w-none text-gray-600 dark:text-gray-300">
-            <p>
-              Using the <strong>{tool.name}</strong> is simple and straightforward. Just enter your details into the input fields above, and the tool will instantly compute the results. Our calculators are designed to give you perfectly accurate outputs based on standard formulas.
-            </p>
-            <p>
-              Whether you are planning your finances, tracking health metrics, or doing quick daily math, this tool ensures you don't have to worry about the underlying complex equations. The results update in real-time, allowing you to tweak your inputs and instantly see the outcome.
-            </p>
-          </div>
-        </section>
-
-        {/* FAQ Section */}
-        <section className="mb-16 max-w-4xl mx-auto bg-gray-50 dark:bg-gray-900 p-8 rounded-3xl border border-gray-100 dark:border-gray-800">
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 flex items-center">
-            <HelpCircle className="mr-3 text-blue-500" /> Frequently Asked Questions
-          </h2>
-          <div className="space-y-6">
-            <div>
-              <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-2">Is this tool free to use?</h3>
-              <p className="text-gray-600 dark:text-gray-400">Yes! All our tools are 100% free with no sign-ups required. We believe in providing accessible utilities for everyone.</p>
+              <h3>Main Features</h3>
+              <ul className="space-y-4">
+                <li><strong>Real-time updates:</strong> See your results change as you adjust your values.</li>
+                <li><strong>Mobile Optimized:</strong> Works perfectly on smartphones, tablets, and desktops.</li>
+                <li><strong>Privacy First:</strong> No data is sent to our servers; everything happens in your browser.</li>
+              </ul>
             </div>
-            <div>
-              <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-2">Are my inputs saved or tracked?</h3>
-              <p className="text-gray-600 dark:text-gray-400">No, all calculations are performed locally in your browser. We prioritize your privacy and do not store any sensitive data you input into our calculators.</p>
-            </div>
+          </section>
+
+          {/* 5. FAQ Section (ONLY ONE) */}
+          <div className="mb-16">
+            <FAQ faqs={[
+              {
+                question: "Is this tool free to use?",
+                answer: "Yes! All our tools are 100% free with no sign-ups required. We believe in providing accessible utilities for everyone."
+              },
+              {
+                question: "Are my inputs saved or tracked?",
+                answer: "No, all calculations are performed locally in your browser. We prioritize your privacy and do not store any sensitive data you input into our calculators."
+              },
+              {
+                question: "How accurate are the results?",
+                answer: "We use standard mathematical formulas and medical/financial industry benchmarks to ensure high precision in all results."
+              }
+            ]} />
           </div>
-        </section>
+        </div>
 
-        <AdSlot position="Bottom of Tool" />
-
-        {/* Related Tools */}
-        <div className="pt-16 border-t border-gray-100 dark:border-gray-800">
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-8">Related Tools</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+        {/* 6. Related Tools */}
+        <div className="pt-16 border-t border-gray-200 dark:border-gray-800">
+          <div className="flex items-center justify-between mb-10">
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Related Tools</h2>
+            <Link href="/tools" className="text-sm font-bold text-blue-600 hover:underline">View all tools</Link>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {allTools.map((t: any) => (
               <Link 
                 key={t._id.toString()} 
                 href={`/tools/${t.slug}`}
-                className="group p-6 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl hover:border-blue-300 dark:hover:border-blue-600 hover:shadow-lg transition-all flex flex-col h-full"
+                className="group p-6 bg-white dark:bg-[#111827] border border-gray-200 dark:border-gray-800 rounded-2xl hover:border-blue-500 dark:hover:border-blue-500 hover:shadow-md transition-all flex flex-col h-full"
               >
                 <h3 className="font-bold text-gray-900 dark:text-white mb-2">{t.name}</h3>
-                <p className="text-sm text-gray-500 dark:text-gray-400 mb-4 line-clamp-2">{t.description}</p>
-                <div className="mt-auto text-sm font-semibold text-blue-600 dark:text-blue-400 group-hover:text-blue-700 dark:group-hover:text-blue-300 flex items-center">
+                <p className="text-sm text-gray-600 dark:text-gray-400 mb-4 line-clamp-2">{t.description}</p>
+                <div className="mt-auto text-sm font-bold text-blue-600 dark:text-blue-400 flex items-center">
                   Try Tool <ArrowRight size={14} className="ml-1 group-hover:translate-x-1 transition-transform" />
                 </div>
               </Link>
             ))}
           </div>
-          
-          <div className="text-center pb-8 border-t border-gray-100 dark:border-gray-800 pt-16">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Need more insights?</h2>
-            <p className="text-gray-500 dark:text-gray-400 mb-6">Check out our related articles and guides to make the most of our tools.</p>
-            <Link href="/blog" className="inline-flex items-center justify-center px-6 py-3 text-sm font-semibold text-blue-600 bg-blue-50 dark:bg-blue-900/30 hover:bg-blue-100 dark:hover:bg-blue-900/50 rounded-lg transition">
-              Browse Blog Articles
-            </Link>
-          </div>
+        </div>
+
+        {/* 7. Bottom Ad */}
+        <div className="mt-20">
+          <AdSlot position="Bottom of Tool" />
         </div>
       </div>
     </div>

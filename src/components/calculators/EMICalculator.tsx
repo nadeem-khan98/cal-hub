@@ -28,101 +28,77 @@ export default function EMICalculator() {
   };
 
   return (
-    <div className="space-y-12">
-      <div className="bg-white p-8 rounded-2xl border border-gray-200 shadow-sm max-w-xl mx-auto w-full">
-        <form onSubmit={calculateEMI} className="space-y-6">
+    <div className="w-full">
+      <form onSubmit={calculateEMI} className="space-y-6">
+        <div className="space-y-5">
           <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-2">Loan Amount ($)</label>
+            <label className="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2">Loan Amount ($)</label>
             <input
               type="number"
               required
               min="1000"
-              className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-shadow text-gray-800"
+              className="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
               value={principal}
               onChange={(e) => setPrincipal(e.target.value)}
               placeholder="e.g. 50000"
             />
           </div>
-          <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-2">Annual Interest Rate (%)</label>
-            <input
-              type="number"
-              step="any"
-              required
-              min="0.1"
-              className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-shadow text-gray-800"
-              value={rate}
-              onChange={(e) => setRate(e.target.value)}
-              placeholder="e.g. 5.5"
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-2">Loan Tenure (Years)</label>
-            <input
-              type="number"
-              required
-              min="1"
-              max="40"
-              className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-shadow text-gray-800"
-              value={time}
-              onChange={(e) => setTime(e.target.value)}
-              placeholder="e.g. 10"
-            />
-          </div>
-          <button
-            type="submit"
-            className="w-full py-3 px-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-colors focus:ring-4 focus:ring-blue-100"
-          >
-            Calculate EMI
-          </button>
-        </form>
-
-        {result && (
-          <div className="mt-8 space-y-4 animate-in fade-in slide-in-from-bottom-4 duration-300">
-            <div className="p-5 bg-blue-50 rounded-xl border border-blue-100 flex justify-between items-center">
-              <span className="text-blue-800 font-medium text-lg">Monthly EMI</span>
-              <span className="text-3xl font-bold text-blue-900 tracking-tight">${result.emi}</span>
-            </div>
-            <div className="p-4 bg-gray-50 rounded-xl border border-gray-100 flex justify-between items-center">
-              <span className="text-gray-600 font-medium">Total Interest</span>
-              <span className="text-xl font-bold text-gray-900">${result.totalInterest}</span>
-            </div>
-            <div className="p-4 bg-gray-50 rounded-xl border border-gray-100 flex justify-between items-center">
-              <span className="text-gray-600 font-medium">Total Payment (Principal + Interest)</span>
-              <span className="text-xl font-bold text-gray-900">${result.totalPayment}</span>
-            </div>
-          </div>
-        )}
-      </div>
-
-      <div className="max-w-3xl mx-auto space-y-8 text-gray-600">
-        <div className="prose prose-blue max-w-none">
-          <h2 className="text-2xl font-bold text-gray-900">Understanding Equated Monthly Installment (EMI)</h2>
-          <p>
-            An Equated Monthly Installment (EMI) is a fixed payment amount made by a borrower to a lender at a specified date each calendar month. Equated monthly installments are used to pay off both interest and principal each month so that over a specified number of years, the loan is fully paid off.
-          </p>
-          <p>
-            Our EMI calculator handles complex amortization schedules instantaneously. By playing with the variables—the principal amount, the interest rate, and the timeline—you can reverse-engineer what kind of home, car, or personal loan actually fits into your monthly budget. Remember that extending the loan term will drastically reduce the monthly payment, but will significantly increase the total overall interest you pay to the bank.
-          </p>
-          <p>
-            Always attempt to put more money towards your starting principal amount (down payment) to heavily cut down the overall loan cost burden.
-          </p>
-        </div>
-
-        <div className="border-t border-gray-200 pt-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">Frequently Asked Questions</h2>
-          <div className="space-y-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">Can EMI change over time?</h3>
-              <p>For a fixed-rate loan, the EMI amount remains completely static for the duration of the loan. However, for a floating/variable interest rate loan, the EMI amount will fluctuate along with market interest rates.</p>
+              <label className="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2">Interest Rate (%)</label>
+              <input
+                type="number"
+                step="any"
+                required
+                min="0.1"
+                className="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
+                value={rate}
+                onChange={(e) => setRate(e.target.value)}
+                placeholder="e.g. 5.5"
+              />
             </div>
             <div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">What does amortization mean?</h3>
-              <p>Amortization refers to spreading out your loan into a series of fixed payments. At the beginning of the loan, most of your EMI goes towards interest. At the end of the loan, the majority of the EMI goes towards the principal.</p>
+              <label className="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2">Tenure (Years)</label>
+              <input
+                type="number"
+                required
+                min="1"
+                max="40"
+                className="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
+                value={time}
+                onChange={(e) => setTime(e.target.value)}
+                placeholder="e.g. 10"
+              />
             </div>
           </div>
         </div>
-      </div>
+
+        <button
+          type="submit"
+          className="w-full py-4 px-6 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl transition-all shadow-sm hover:shadow-md active:scale-[0.98]"
+        >
+          Calculate EMI
+        </button>
+      </form>
+
+      {result && (
+        <div className="mt-10 space-y-4 animate-in fade-in zoom-in duration-300">
+          <div className="p-8 bg-blue-50 dark:bg-blue-900/20 border border-blue-100 dark:border-blue-800/30 rounded-2xl flex flex-col items-center justify-center text-center">
+            <span className="text-sm text-blue-800 dark:text-blue-400 font-bold uppercase tracking-wider mb-2">Monthly EMI</span>
+            <span className="text-4xl font-bold text-blue-900 dark:text-blue-300 tracking-tight">${result.emi}</span>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="p-6 bg-green-50 dark:bg-green-900/20 border border-green-100 dark:border-green-800/30 rounded-2xl text-center">
+              <span className="block text-sm text-green-800 dark:text-green-400 font-bold uppercase tracking-wider mb-1">Total Interest</span>
+              <span className="text-xl font-bold text-green-700 dark:text-green-300">${result.totalInterest}</span>
+            </div>
+            <div className="p-6 bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl text-center">
+              <span className="block text-sm text-gray-600 dark:text-gray-400 font-bold uppercase tracking-wider mb-1">Total Payment</span>
+              <span className="text-xl font-bold text-gray-900 dark:text-white">${result.totalPayment}</span>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

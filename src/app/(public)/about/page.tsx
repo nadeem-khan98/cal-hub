@@ -5,10 +5,10 @@ export const metadata = {
 
 export default function AboutPage() {
   return (
-    <div className="max-w-3xl mx-auto py-12 px-4">
-      <h1 className="text-4xl font-extrabold text-gray-900 mb-8 tracking-tight">About CalcHub</h1>
+    <div className="max-w-3xl mx-auto py-12 px-4 transition-colors duration-300">
+      <h1 className="text-4xl font-extrabold text-gray-900 dark:text-white mb-8 tracking-tight">About CalcHub</h1>
       
-      <div className="prose prose-blue prose-lg text-gray-700">
+      <div className="prose prose-blue dark:prose-invert prose-lg text-gray-700 dark:text-gray-300">
         <p>
           Welcome to <strong>CalcHub</strong>, your ultimate destination for free, reliable, and user-friendly online calculators. 
           Our mission is to simplify your life by providing the tools you need to make quick, accurate calculations.

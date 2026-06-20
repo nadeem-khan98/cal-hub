@@ -29,16 +29,16 @@ export default function TipCalculator() {
 
   return (
     <div className="space-y-12">
-      <div className="bg-white p-8 rounded-2xl border border-gray-200 shadow-sm max-w-xl mx-auto w-full">
+      <div className="bg-white dark:bg-gray-800 p-8 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-sm max-w-xl mx-auto w-full transition-colors duration-300">
         <form onSubmit={calculateTip} className="space-y-6">
           <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-2">Total Bill Amount ($)</label>
+            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Total Bill Amount ($)</label>
             <input
               type="number"
               step="any"
               required
               min="0"
-              className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-shadow text-gray-800"
+              className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all text-gray-800 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
               value={bill}
               onChange={(e) => setBill(e.target.value)}
               placeholder="e.g. 85.50"
@@ -47,24 +47,24 @@ export default function TipCalculator() {
           
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">Tip (%)</label>
+              <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Tip (%)</label>
               <input
                 type="number"
                 step="any"
                 required
                 min="0"
-                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-shadow text-gray-800"
+                className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all text-gray-800 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
                 value={tipPercent}
                 onChange={(e) => setTipPercent(e.target.value)}
               />
             </div>
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">Split the Bill (People)</label>
+              <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Split the Bill (People)</label>
               <input
                 type="number"
                 required
                 min="1"
-                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-shadow text-gray-800"
+                className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all text-gray-800 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
                 value={people}
                 onChange={(e) => setPeople(e.target.value)}
               />
@@ -73,7 +73,7 @@ export default function TipCalculator() {
           
           <button
             type="submit"
-            className="w-full py-3 px-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-colors focus:ring-4 focus:ring-blue-100"
+            className="w-full py-3 px-4 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg transition-all shadow-md hover:shadow-lg focus:ring-4 focus:ring-blue-500/20 active:scale-[0.98]"
           >
             Calculate Tip
           </button>
@@ -81,27 +81,27 @@ export default function TipCalculator() {
 
         {result && (
           <div className="mt-8 space-y-4 animate-in fade-in slide-in-from-bottom-4 duration-300">
-            <div className="p-4 bg-gray-50 rounded-xl border border-gray-100 flex justify-between items-center">
-              <span className="text-gray-600 font-medium">Tip Amount</span>
-              <span className="text-xl font-bold text-gray-900">${result.tipAmount}</span>
+            <div className="p-4 bg-gray-50 dark:bg-gray-900/50 rounded-xl border border-gray-100 dark:border-gray-800 flex justify-between items-center">
+              <span className="text-gray-600 dark:text-gray-400 font-medium">Tip Amount</span>
+              <span className="text-xl font-bold text-gray-900 dark:text-white">${result.tipAmount}</span>
             </div>
-            <div className="p-4 bg-gray-50 rounded-xl border border-gray-100 flex justify-between items-center">
-              <span className="text-gray-600 font-medium">Total Bill (w/ Tip)</span>
-              <span className="text-xl font-bold text-gray-900">${result.totalBill}</span>
+            <div className="p-4 bg-gray-50 dark:bg-gray-900/50 rounded-xl border border-gray-100 dark:border-gray-800 flex justify-between items-center">
+              <span className="text-gray-600 dark:text-gray-400 font-medium">Total Bill (w/ Tip)</span>
+              <span className="text-xl font-bold text-gray-900 dark:text-white">${result.totalBill}</span>
             </div>
             {parseInt(people) > 1 && (
-              <div className="p-4 bg-blue-50 rounded-xl border border-blue-100 flex justify-between items-center">
-                <span className="text-blue-800 font-medium">Each Person Pays</span>
-                <span className="text-2xl font-bold text-blue-900">${result.perPerson}</span>
+              <div className="p-4 bg-blue-50 dark:bg-blue-900/20 rounded-xl border border-blue-100 dark:border-blue-800/30 flex justify-between items-center">
+                <span className="text-blue-800 dark:text-blue-400 font-medium">Each Person Pays</span>
+                <span className="text-2xl font-bold text-blue-900 dark:text-blue-300">${result.perPerson}</span>
               </div>
             )}
           </div>
         )}
       </div>
 
-      <div className="max-w-3xl mx-auto space-y-8 text-gray-600">
-        <div className="prose prose-blue max-w-none">
-          <h2 className="text-2xl font-bold text-gray-900">Mastering the Tip Split</h2>
+      <div className="max-w-3xl mx-auto space-y-8 text-gray-600 dark:text-gray-400 transition-colors duration-300">
+        <div className="prose prose-blue dark:prose-invert max-w-none">
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Mastering the Tip Split</h2>
           <p>
             Whether grabbing lunch by yourself or celebrating a massive dinner with twelve of your closest friends, calculating the precise tip and parsing the bill efficiently can be a headache. Tipping customs differ violently from country to country, but in places like North America, gratuity is historically baked into the service economy.
           </p>
@@ -113,15 +113,15 @@ export default function TipCalculator() {
           </p>
         </div>
 
-        <div className="border-t border-gray-200 pt-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">Frequently Asked Questions</h2>
+        <div className="border-t border-gray-200 dark:border-gray-700 pt-8">
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Frequently Asked Questions</h2>
           <div className="space-y-6">
             <div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">Should I tip on the pre-tax or post-tax amount?</h3>
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Should I tip on the pre-tax or post-tax amount?</h3>
               <p>Etiquette experts generally agree that you should calculate your tip based on the pre-tax amount. However, many people simply tip on the post-tax total for numerical simplicity.</p>
             </div>
             <div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">What happens if the calculation gives an awkward decimal?</h3>
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">What happens if the calculation gives an awkward decimal?</h3>
               <p>Our app securely rounds payouts to the nearest two standard decimal digits to match global currency standards.</p>
             </div>
           </div>

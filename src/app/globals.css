@@ -2,8 +2,8 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f9fafb; /* gray-50 */
+  --foreground: #111827; /* gray-900 */
 }
 
 @theme inline {
@@ -13,15 +13,27 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  * {
+    @apply border-gray-200 dark:border-gray-800 transition-colors duration-300;
+  }
+  
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+.dark {
+  --background: #0B0F19; /* premium dark background */
+  --foreground: #ffffff; /* pure white for primary text */
+}
+
+/* Custom Prose Styling for Dark Mode */
+.prose {
+  @apply text-gray-600 dark:text-gray-300 leading-relaxed;
+}
+
+.prose h1, .prose h2, .prose h3, .prose h4 {
+  @apply text-gray-900 dark:text-white font-bold tracking-tight;
 }

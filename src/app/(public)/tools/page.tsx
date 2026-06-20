@@ -47,15 +47,13 @@ export default async function ToolsIndex() {
   return (
     <div className="max-w-6xl mx-auto px-4 py-16">
       
-      {/* 🔥 HEADER */}
-      <div className="max-w-2xl mb-12">
-        <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-4 
-          bg-gradient-to-r from-blue-600 to-indigo-500 
-          bg-clip-text text-transparent">
-          All Calculator Tools
+      {/* HEADER */}
+      <div className="max-w-3xl mb-12">
+        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6">
+          Calculator Tools
         </h1>
 
-        <p className="text-lg text-gray-600 dark:text-gray-400">
+        <p className="text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
           Explore our collection of fast, accurate, and free calculators for finance,
           math, health, and daily use.
         </p>

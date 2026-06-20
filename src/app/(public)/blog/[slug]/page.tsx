@@ -114,31 +114,35 @@ export default async function BlogPostPage({ params }: Props) {
   const toolMatches = Array.from(autoLinkedContent.matchAll(/\[\[TOOL:([a-z0-9-]+)\]\]/g));
 
   return (
-    <div className="bg-white dark:bg-gray-950 transition-colors">
-      <article className="max-w-3xl mx-auto py-12 px-4 shadow-sm min-h-screen">
+    <div className="bg-background text-foreground transition-colors min-h-screen">
+      <article className="max-w-3xl mx-auto py-16 px-4">
         <JsonLd data={jsonLd} />
 
-        <Link href="/blog" className="inline-flex items-center text-sm font-semibold text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 mb-10 transition-colors">
+        <Link href="/blog" className="inline-flex items-center text-sm font-bold text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 mb-10 transition-colors">
           <ArrowLeft size={16} className="mr-2" /> Back to Articles
         </Link>
 
         {blog.tags && blog.tags.length > 0 && (
           <div className="flex flex-wrap gap-2 mb-6">
             {blog.tags.map((tag: string) => (
-              <span key={tag} className="px-3 py-1 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 text-xs font-bold uppercase tracking-wider rounded-md">
+              <span key={tag} className="px-3 py-1.5 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-[10px] font-bold uppercase tracking-widest rounded-full border border-blue-100 dark:border-blue-800/30">
                 {tag}
               </span>
             ))}
           </div>
         )}
 
-        <header className="mb-12 border-b border-gray-100 dark:border-gray-800 pb-8">
-          <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white tracking-tight leading-tight mb-6">
+        <header className="mb-12">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white tracking-tight leading-tight mb-8">
             {blog.title}
           </h1>
-          <div className="flex items-center justify-between text-gray-500 dark:text-gray-400 text-sm font-medium">
-            <span>Published {new Date(blog.createdAt).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}</span>
-            <span className="bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 px-3 py-1 rounded-full text-xs font-bold tracking-wide">
+          <div className="flex items-center gap-6 text-gray-500 dark:text-gray-400 text-sm font-medium border-y border-gray-200 dark:border-gray-800 py-6">
+            <span className="flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-blue-600"></span>
+              {new Date(blog.createdAt).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}
+            </span>
+            <span className="flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-blue-600"></span>
               {Math.ceil(blog.content.length / 1000)} min read
             </span>
           </div>
@@ -179,15 +183,15 @@ export default async function BlogPostPage({ params }: Props) {
         </div>
 
         {blog.faq && blog.faq.length > 0 && (
-          <section className="my-16 bg-gray-50 dark:bg-gray-900 p-8 rounded-3xl border border-gray-100 dark:border-gray-800">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 flex items-center">
-              <HelpCircle className="mr-3 text-blue-500" /> Frequently Asked Questions
+          <section className="my-16 bg-[#111827] text-white p-10 rounded-3xl border border-gray-800">
+            <h2 className="text-3xl font-bold mb-8 flex items-center gap-3">
+              <HelpCircle className="text-blue-400" /> FAQ
             </h2>
-            <div className="space-y-6">
+            <div className="space-y-8">
               {blog.faq.map((f: any, idx: number) => (
-                <div key={idx}>
-                  <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-2">{f.question}</h3>
-                  <p className="text-gray-600 dark:text-gray-400 leading-relaxed text-sm p-4 bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-50 dark:border-gray-700">
+                <div key={idx} className="border-b border-gray-800 pb-8 last:border-0 last:pb-0">
+                  <h3 className="text-lg font-bold mb-3">{f.question}</h3>
+                  <p className="text-gray-400 leading-relaxed">
                     {f.answer}
                   </p>
                 </div>
